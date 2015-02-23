@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:composition template="template_initial.xhtml">
+	<ui:define name="nav_bar">
+		<ui:include src="top_bar.xhtml" />
+		<ui:include src="search_bar.xhtml" />
+	</ui:define>
+
+	<ui:define name="container">
+		<h3>INFRATORES</h3>
+
+
+		<table class="table table-bordered table-striped">
+
+
+			<thead>
+				<tr>
+					<th>Nome</th>
+					<th>CPF</th>
+					<th>Apelido</th>
+					<th>Genitora</th>
+					<th>Editar</th>
+					<th>Excluir</th>
+				</tr>
+			</thead>
+			<tbody>
+				<ui:repeat var="infrator" value="#{infratorMB.infratores}">
+					<tr>
+
+						<td>#{infrator.nome}</td>
+
+						<td>#{infrator.cpf}</td>
+
+						<td>#{infrator.apelido}</td>
+
+						<td>#{infrator.filiacao.nomeGenitora}</td>
+
+
+						<td><h:form>
+								<h:commandLink action="#">
+									<!--<h:commandLink action="#{studentMB.getStudent(stud.id)}">
+ -->
+									<i class="glyphicon glyphicon-edit"></i>
+								</h:commandLink>
+							</h:form></td>
+						<td><h:form>
+								<h:commandLink action="#">
+									<!-- <h:commandLink action="#{studentMB.deleteStudent(stud.id)}"> -->
+									<i class="glyphicon glyphicon-trash"></i>
+								</h:commandLink>
+							</h:form></td>
+					</tr>
+				</ui:repeat>
+			</tbody>
+		</table>
+
+
+
+
+		<div class="row">
+			<span>#{index.message}</span>
+		</div>
+	</ui:define>
+	<ui:define name="title">        
+            Bem-vindo CidadaoDeBem.com.br        
+    </ui:define>
+</ui:composition>
+</html>
