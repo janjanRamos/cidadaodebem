@@ -12,11 +12,11 @@
 				<div class="col-md-6">
 					<h:form>
 						<div class="input-group">
-							<h:inputText value="#{infratorMB.busca}"
+							<h:inputText value="#{infratorBuscaMB.busca}"
 								styleClass="form-control" />
 
 							<span class="input-group-btn"> <h:commandButton
-									action="#{infratorMB.buscar}" value="buscar"
+									actionListener="#{infratorBuscaMB.buscar}" value="buscar"
 									styleClass="btn btn-default" />
 							</span>
 						</div>

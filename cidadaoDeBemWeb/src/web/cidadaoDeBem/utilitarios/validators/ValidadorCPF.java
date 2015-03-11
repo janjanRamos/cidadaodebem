@@ -1,4 +1,4 @@
-package web.cidadaoDeBem.validators.utilitarios;
+package web.cidadaoDeBem.utilitarios.validators;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;

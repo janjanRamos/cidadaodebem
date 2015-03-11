@@ -47,4 +47,5 @@ public class InfratorDAO extends GenericDAO<Infrator> {
 		System.out.println(nome);
 		return super.filterResult(Infrator.BUSCAR_INFRATORES, parameters);
 	}
+
 }

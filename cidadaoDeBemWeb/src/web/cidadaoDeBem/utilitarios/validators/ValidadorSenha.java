@@ -1,4 +1,4 @@
-package web.cidadaoDeBem.validators.utilitarios;
+package web.cidadaoDeBem.utilitarios.validators;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -11,8 +11,8 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
-@FacesValidator(value = "validarSenha")
-public class ValidarSenha implements Validator {
+@FacesValidator(value = "validadorSenha")
+public class ValidadorSenha implements Validator {
 
 	public static boolean senhaValida(String senha) {
 		Pattern pattern = Pattern

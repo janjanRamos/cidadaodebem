@@ -52,6 +52,16 @@ public class Infrator implements Serializable {
 	private List<Mandado> mandados;
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<MarcaCorporal> marcasCorporais;
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Imagem> imagens;
+
+	public List<Imagem> getImagens() {
+		return imagens;
+	}
+
+	public void setImagens(List<Imagem> imagens) {
+		this.imagens = imagens;
+	}
 
 	public Biotipo getBiotipo() {
 		return biotipo;

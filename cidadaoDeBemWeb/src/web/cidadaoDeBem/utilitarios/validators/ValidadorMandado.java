@@ -1,6 +1,5 @@
-package web.cidadaoDeBem.validators.utilitarios;
+package web.cidadaoDeBem.utilitarios.validators;
 
-import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
@@ -9,17 +8,11 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
-import cidadaoDeBem.ejb.facade.PolicialFacade;
+@FacesValidator(value = "validadorMandado")
+public class ValidadorMandado implements Validator {
 
-//não está funcionando
-@FacesValidator(value = "validarMatricula")
-public class ValidarMatricula implements Validator {
-
-	@EJB
-	private PolicialFacade policialFacade;
-
-	public boolean validarMatricula(String matricula) {
-		if (!this.policialFacade.BuscarPolicial(null, matricula).isEmpty())
+	protected boolean verificarSomenteNumeros(String numeroMandado) {
+		if (!numeroMandado.matches("[0-9]+"))
 			return false;
 		return true;
 	}
@@ -28,11 +21,11 @@ public class ValidarMatricula implements Validator {
 	public void validate(FacesContext context, UIComponent toValidate,
 			Object value) throws ValidatorException {
 		// TODO Auto-generated method stub
-		String matricula = String.valueOf(value);
-		if (!validarMatricula(matricula)) {
+		String numeroMandado = (String) value;
+		if (!this.verificarSomenteNumeros(numeroMandado)) {
 			((UIInput) toValidate).setValid(false);
 			throw new ValidatorException(new FacesMessage(
-					"Matricula já cadastrada."));
+					"Campo aceita somente números."));
 		}
 
 	}

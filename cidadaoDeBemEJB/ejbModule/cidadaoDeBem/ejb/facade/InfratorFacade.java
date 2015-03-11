@@ -18,4 +18,6 @@ public interface InfratorFacade {
 
 	public Infrator update(Infrator infrator);
 
+	public Infrator buscarInfrator(int id);
+
 }

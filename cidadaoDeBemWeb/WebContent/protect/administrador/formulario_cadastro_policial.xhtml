@@ -15,7 +15,7 @@
 		<br />
 		<h:form class="form-horizontal" role="form">
 
-			<div class="form-group control-group">
+			<div class="form-group">
 				<h:outputLabel for="inputPolicial" value="Nome Completo"
 					styleClass="col-sm-3 control-label" />
 				<div class="col-sm-6">
@@ -62,7 +62,7 @@
 						required="true"
 						validatorMessage="A senha não segue o padrão exigido.">
 
-						<f:validator validatorId="validarSenha" />
+						<f:validator validatorId="validadorSenha" />
 						<f:ajax event="blur" render="m_inputSenha" />
 
 					</h:inputSecret>
@@ -88,7 +88,7 @@
 						validatorMessage="Valor digitado não confere com a senha.">
 						<f:attribute name="senha" value="#{policialMB.senha}" />
 						<f:ajax event="blur" render="m_inputConfirma" />
-						<f:validator validatorId="validarSenha" />
+						<f:validator validatorId="validadorConfirmarSenha" />
 					</h:inputSecret>
 					<h:message id="m_inputConfirma" for="inputConfirma"
 						style="color:#D74937;" />

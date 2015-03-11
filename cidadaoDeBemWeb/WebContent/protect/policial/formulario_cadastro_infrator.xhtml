@@ -13,6 +13,14 @@
 		<h1>Cadastro de Infratores</h1>
 		<p>Banco de Dados da Polícia Militar do Rio Grande do Norte</p>
 		<br />
+		<h:form enctype="multipart/form-data">
+
+			<p:fileUpload value="#{infratorMB.file}" mode="simple"
+				skinSimple="true" />
+
+			<p:commandButton value="Submit" ajax="false"
+				actionListener="#{infratorMB.fileUpLoad}" />
+		</h:form>
 		<h:form class="form-horizontal" role="form">
 			<div class="form-group">
 				<h:outputLabel for="inputInfrator" value="Nome Completo"
@@ -313,7 +321,7 @@
 			</fieldset>
 			<div class="form-group">
 				<div class="col-sm-offset-3 col-sm-10">
-					<h:commandButton id="botao" action="#{infratorMB.salvar}"
+					<h:commandButton id="botao" action="#{infratorMB.salvar()}"
 						value="Cadastrar Infrator" styleClass="btn btn-default" />
 				</div>
 			</div>

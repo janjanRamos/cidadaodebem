@@ -8,9 +8,9 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
-<ui:composition template="template_initial.xhtml">
+<ui:composition template="/templates/template_initial.xhtml">
 	<ui:define name="nav_bar">
-		<ui:include src="top_bar.xhtml" />
+		<ui:include src="/public/top_bar.xhtml" />
 		<ui:include src="search_bar.xhtml" />
 	</ui:define>
 
@@ -32,7 +32,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<ui:repeat var="infrator" value="#{infratorMB.infratores}">
+				<ui:repeat var="infrator" value="#{infratorBuscaMB.infratores}">
 					<tr>
 
 						<td>#{infrator.nome}</td>
@@ -45,6 +45,7 @@
 
 
 						<td><h:form>
+
 								<h:commandLink action="#">
 									<!--<h:commandLink action="#{studentMB.getStudent(stud.id)}">
  -->

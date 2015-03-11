@@ -61,6 +61,15 @@ public class InfratorImpl implements InfratorFacade {
 		isInfratorWithAllData(infrator);
 		infratorDAO.update(infrator);
 		return infrator;
+
+	}
+
+	@Override
+	public Infrator buscarInfrator(int id) {
+		// TODO Auto-generated method stub
+		infratorDAO.find(id);
+		return infratorDAO.find(id);
+
 	}
 
 }

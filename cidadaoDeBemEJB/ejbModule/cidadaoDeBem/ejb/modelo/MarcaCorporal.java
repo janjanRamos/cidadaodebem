@@ -1,11 +1,14 @@
 package cidadaoDeBem.ejb.modelo;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class MarcaCorporal implements Serializable {
@@ -18,8 +21,19 @@ public class MarcaCorporal implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Imagem> imagens;
 	private String tipo;
 	private String descricao;
+
+	
+	public List<Imagem> getImagens() {
+		return imagens;
+	}
+
+	public void setImagens(List<Imagem> imagens) {
+		this.imagens = imagens;
+	}
 
 	public int getId() {
 		return id;

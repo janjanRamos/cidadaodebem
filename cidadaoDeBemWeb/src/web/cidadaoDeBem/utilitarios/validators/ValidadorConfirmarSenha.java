@@ -1,4 +1,4 @@
-package web.cidadaoDeBem.validators.utilitarios;
+package web.cidadaoDeBem.utilitarios.validators;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -8,8 +8,8 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
-@FacesValidator(value = "alidarConfirmarSenh")
-public class ValidarConfirmarSenha implements Validator {
+@FacesValidator(value = "validadorConfirmarSenha")
+public class ValidadorConfirmarSenha implements Validator {
 
 	public static boolean compararSenhas(String confirmaSenha, String senha) {
 		if (!confirmaSenha.equals(senha))
