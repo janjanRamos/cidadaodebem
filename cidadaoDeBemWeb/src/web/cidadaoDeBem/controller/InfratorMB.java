@@ -1,6 +1,5 @@
 package web.cidadaoDeBem.controller;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -8,14 +7,15 @@ import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
-
-import org.primefaces.model.UploadedFile;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import web.cidadaoDeBem.enums.Estado;
 import web.cidadaoDeBem.enums.RegimeDePena;
+import web.cidadaoDeBem.utilitarios.ImagemUtil;
 import cidadaoDeBem.ejb.facade.InfratorFacade;
 import cidadaoDeBem.ejb.modelo.Biotipo;
 import cidadaoDeBem.ejb.modelo.Endereco;
@@ -25,7 +25,7 @@ import cidadaoDeBem.ejb.modelo.Infrator;
 import cidadaoDeBem.ejb.modelo.Mandado;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class InfratorMB implements Serializable {
 
 	/**
@@ -43,11 +43,13 @@ public class InfratorMB implements Serializable {
 	private String rua;
 	private Filiacao filiacao;
 	private Mandado mandado;
-	private UploadedFile file;
 	private List<Imagem> imagens;
 
+	@ManagedProperty(value = "#{uploadMB}")
+	private UploadMB uploadMB;
+
 	// Strings de navegação
-	public final String MOSTRAR_INFRATOR_CADASTRADO = "/protect/policial/cadastro_mandado.xhtml";
+	public final String MOSTRAR_INFRATOR_CADASTRADO = "/protect/policial/feedBack_cadastrar_infrator.xhtml";
 
 	public List<Imagem> getImagens() {
 		if (imagens == null)
@@ -59,13 +61,14 @@ public class InfratorMB implements Serializable {
 		this.imagens = imagens;
 	}
 
-	public UploadedFile getFile() {
-		return file;
-	}
-
-	public void setFile(UploadedFile file) {
-		this.file = file;
-	}
+	// Modo uploadSimples
+	// public UploadedFile getFile() {
+	// return file;
+	// }
+	//
+	// public void setFile(UploadedFile file) {
+	// this.file = file;
+	// }
 
 	public Estado[] getEstados() {
 
@@ -150,6 +153,14 @@ public class InfratorMB implements Serializable {
 		return new Date();
 	}
 
+	public UploadMB getUploadMB() {
+		return uploadMB;
+	}
+
+	public void setUploadMB(UploadMB uploadMB) {
+		this.uploadMB = uploadMB;
+	}
+
 	public Date getHojeMenos100anos() {
 		Calendar menos100 = Calendar.getInstance();
 		menos100.add(Calendar.YEAR, -100);
@@ -174,8 +185,20 @@ public class InfratorMB implements Serializable {
 		if (filiacao.getNomeGenitor() == null)
 			filiacao.setNomeGenitor("");
 		infrator.setFiliacao(filiacao);
-		infrator.setImagens(imagens);
+		if (imagens == null)
+			imagens = new ArrayList<Imagem>();
+		if (!(uploadMB.getListaImageBytes() == null)) {
+			imagens = ImagemUtil.handlePicture(this.uploadMB
+					.getListaImageBytes());
+			System.out.println(this.uploadMB.getListaImageBytes());
+			infrator.setImagens(imagens);
+		}
 		infratorFacade.save(infrator);
+		FacesContext.getCurrentInstance().addMessage(
+				null,
+				new FacesMessage("Cadastro",
+						"Cadastro do infrator Efetuado com Sucesso"));
+
 		filiacao = null;
 		biotipo = null;
 		endereco = null;
@@ -193,30 +216,17 @@ public class InfratorMB implements Serializable {
 		return true;
 	}
 
-	// upload imagem -------------------------
-	public void fileUpLoad() throws IOException {
-		try {
-			Imagem imagem = new Imagem();
-			if (imagens == null)
-				imagens = new ArrayList<Imagem>();
-			// Recebe oo arquivo do evento
-
-			imagem.setImagem(file.getContents());
-			imagens.add(imagem);
-			System.out.println(imagens.size());
-
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-	}
-
 	// tamanho máximos das imagens
 
 	private static int Max_tamanho_imagem = 2 * 1024 * 1024;
+	private static int Max_qtd_imagens = 3;
 
-	public int tamanhoMaximoImagem() {
+	public int getTamanhoMaximoImagem() {
 		return Max_tamanho_imagem;
 
+	}
+
+	public int getQuantidadeMaximaImagens() {
+		return Max_qtd_imagens;
 	}
 }

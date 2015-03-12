@@ -13,13 +13,36 @@
 		<h1>Cadastro de Infratores</h1>
 		<p>Banco de Dados da Polícia Militar do Rio Grande do Norte</p>
 		<br />
-		<h:form enctype="multipart/form-data">
 
-			<p:fileUpload value="#{infratorMB.file}" mode="simple"
-				skinSimple="true" />
 
-			<p:commandButton value="Submit" ajax="false"
-				actionListener="#{infratorMB.fileUpLoad}" />
+
+		<h:form enctype="multipart/form-data" class="form-horizontal"
+			role="form">
+			<div class="form-group">
+				<h:outputLabel value="UPLOAD DE FOTOS DOS INFRATORES" />
+				<p:fileUpload id="inputImagens"
+					fileUploadListener="#{uploadMB.handlePictureUploaded}"
+					multiple="true" skinSimple="true" update="m_inputImagens"
+					allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+					sizeLimit="#{infratorMB.tamanhoMaximoImagem}"
+					fileLimit="#{infratorMB.quantidadeMaximaImagens}"
+					invalidFileMessage="Formato de arquivo inválido."
+					invalidSizeMessage="Tamanho do arquivo superior ao permitido."
+					fileLimitMessage="#{infratorMB.quantidadeMaximaImagens} é a quantidade máxima de imagens."
+					label="Escolher" cancelLabel="Cancelar" previewWidth="60" />
+
+				<h:message id="m_inputImagens" for="inputImagens"
+					style="color:#D74937;" />
+				<!-- <p:galleria var="foto" value="#{infratorMB.imagens}" effect="slide"
+				effectSpeed="100" panelHeight="250" panelWidth="500"
+				frameHeight="70" frameWidth="160" filmstripPosition="bottom"
+				showOverlays="true">
+
+				<p:graphicImage value="/fotos/#{foto.nome}.png" cache="false"
+					width="500" height="250" />
+ -->
+				<!-- </p:galleria> -->
+			</div>
 		</h:form>
 		<h:form class="form-horizontal" role="form">
 			<div class="form-group">
@@ -118,7 +141,7 @@
 						<f:validator validatorId="validadorCPF" />
 					</h:inputText>
 					<h:message id="m_inputCPF" for="inputCPF" style="color:#D74937;" />
-					<h:messages id="c_inputCPF" style="color:#D74937;" />
+
 				</div>
 			</div>
 			<div class="form-group">
