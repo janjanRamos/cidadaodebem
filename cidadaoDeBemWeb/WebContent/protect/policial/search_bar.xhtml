@@ -20,6 +20,15 @@
 									styleClass="btn btn-default" />
 							</span>
 						</div>
+
+						<div class="input-group">
+							Pesquisar Por:&nbsp;&nbsp;&nbsp;
+							<h:selectBooleanCheckbox value="#{infratorBuscaMB.mae}">Genitora&nbsp;</h:selectBooleanCheckbox>&nbsp;
+							<h:selectBooleanCheckbox value="#{infratorBuscaMB.nome}">Nome Infrator&nbsp;</h:selectBooleanCheckbox>&nbsp;
+							<h:selectBooleanCheckbox value="#{infratorBuscaMB.cpf}">CPF&nbsp;</h:selectBooleanCheckbox>&nbsp;
+							<h:selectBooleanCheckbox value="#{infratorBuscaMB.apelido}">Apelido&nbsp;</h:selectBooleanCheckbox>&nbsp;
+							
+						</div>
 					</h:form>
 				</div>
 				<div class="col-md-4"></div>
